@@ -17,4 +17,6 @@ Mexendo nos parâmetros do Gatling e colocando para 10k req/s, obtive o gráfico
 
 ![gatling10k](./misc/rinha10k.png)
 
+Disclaimer: o código podia estar mais limpo e organizado, mas foram 2 dias fazendo, então estava no modo: "teste passou, push!".
+
 Agora é aguardar a terceira edição! :D
