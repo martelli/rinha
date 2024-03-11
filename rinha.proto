@@ -1,0 +1,52 @@
+syntax = "proto3";
+
+option go_package = "./pb";
+
+message Cliente {
+  int32 id = 1;
+  int32 limite = 2;
+  int32 saldo_inicial = 3;
+  int32 saldo_corrente = 4;
+  int32 ultima_transacao = 5;
+}
+
+message Transacao {
+  int32 valor = 3;
+  string tipo = 4;
+  string descricao = 5;
+  string realizada_em = 6 [json_name="realizada_em"];
+}
+
+message AddClienteRequest {
+  Cliente cliente = 1;
+}
+
+message AddClienteResponse {
+  bool success = 1;
+}
+
+message AddTransacaoRequest {
+  int32 cliente_id = 1;
+  Transacao transacao = 2;
+}
+
+message Saldo {
+  int32 total = 1;
+  string data_extrato = 2 [json_name="data_extrato"];
+  int32 limite = 3;
+}
+
+message ExtratoRequest {
+  int32 cliente_id = 1;
+}
+
+message Extrato {
+  Saldo saldo = 1;
+  repeated Transacao ultimas_transacoes = 2 [json_name="ultimas_transacoes"];
+}
+
+service RinhaDB {
+  rpc AddCliente(Cliente) returns (AddClienteResponse);
+  rpc AddTransacao(AddTransacaoRequest) returns (Saldo);
+  rpc GetExtrato(ExtratoRequest) returns (Extrato);
+}
